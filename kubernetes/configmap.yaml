@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cinema-config
+data:
+  TMDB_API_KEY: 19800010c672505994853080d5177380

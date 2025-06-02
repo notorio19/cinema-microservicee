@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cinema-app
+  template:
+    metadata:
+      labels:
+        app: cinema-app
+    spec:
+      containers:
+      - name: cinema-app
+        image: cinema-microservicee:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: TMDB_API_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: cinema-config
+              key: TMDB_API_KEY
+        - name: DB_HOST
+          value: "host.docker.internal"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: ""
+        - name: DB_NAME
+          value: "cinema"
